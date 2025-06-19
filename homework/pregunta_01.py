@@ -12,5 +12,13 @@ def pregunta_01():
 
     Rta/
     214
-
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        lines = file.readlines()
+
+    total = 0
+    for line in lines:
+        columns = line.strip().split("\t")
+        total += int(columns[1])
+
+    return total
