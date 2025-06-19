@@ -15,3 +15,22 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        lines = file.readlines()
+
+    result = {}
+
+    for line in lines:
+        columns = line.strip().split("\t")
+        if len(columns) > 4:
+            key = columns[0]
+            value_str = columns[4]
+            pairs = value_str.split(",")
+            total_value = sum(int(pair.split(":")[1]) for pair in pairs)
+
+            if key not in result:
+                result[key] = 0
+            result[key] += total_value
+
+    return dict(sorted(result.items()))
