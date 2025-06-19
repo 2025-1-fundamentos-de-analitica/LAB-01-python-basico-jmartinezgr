@@ -25,3 +25,19 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+
+    with open("files/input/data.csv", "r") as file:
+        lines = file.readlines()
+
+    column_map = {}
+    for line in lines:
+        columns = line.strip().split("\t")
+        if len(columns) > 1:
+            key = int(columns[1])
+            value = columns[0]
+            if key not in column_map:
+                column_map[key] = []
+            column_map[key].append(value)
+
+    result = [(key, value) for key, value in sorted(column_map.items())]
+    return result
