@@ -15,3 +15,18 @@ def pregunta_02():
     [('A', 8), ('B', 7), ('C', 5), ('D', 6), ('E', 14)]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        lines = file.readlines()
+
+    count_dict = {}
+    for line in lines:
+        columns = line.strip().split("\t")
+        if len(columns) > 0:
+            first_letter = columns[0][0].upper()
+            if first_letter in count_dict:
+                count_dict[first_letter] += 1
+            else:
+                count_dict[first_letter] = 1
+
+    sorted_counts = sorted(count_dict.items())
+    return sorted_counts
