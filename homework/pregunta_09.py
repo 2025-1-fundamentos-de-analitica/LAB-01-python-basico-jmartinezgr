@@ -24,3 +24,22 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        lines = file.readlines()
+
+    result = {}
+    for line in lines:
+        columns = line.strip().split("\t")
+        if len(columns) > 4:
+            data_str = columns[4]
+            pairs = data_str.split(",")
+            for pair in pairs:
+                key, _ = pair.split(":")
+                if key not in result:
+                    result[key] = 0
+                result[key] += 1
+
+    sorted_keys = sorted(result.keys())
+    result = {key: result[key] for key in sorted_keys}
+    return result
