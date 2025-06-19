@@ -27,3 +27,20 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+
+    with open("files/input/data.csv", "r") as file:
+        lines = file.readlines()
+
+    result = {}
+    for line in lines:
+        columns = line.strip().split("\t")
+        if len(columns) > 1:
+            key = int(columns[1])
+            value = columns[0]
+            if key not in result:
+                result[key] = []
+            result[key].append(value)
+
+    # Convert lists to sets to remove duplicates and then back to sorted lists
+    final_result = [(key, sorted(set(value))) for key, value in sorted(result.items())]
+    return final_result
